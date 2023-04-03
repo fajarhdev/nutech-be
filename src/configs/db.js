@@ -8,7 +8,8 @@ require("dotenv").config();
 // });
 
 const dbUri = process.env.JAWSDB_URL;
-const Conn = new Sequelize(String(dbUri), {
+console.log(dbUri);
+const Conn = new Sequelize(dbUri, {
 	dialect: "mysql",
 });
 

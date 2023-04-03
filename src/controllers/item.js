@@ -10,6 +10,7 @@ const AddItem = async (req, res) => {
 	const { name, buyPrice, sellPrice, stock } = req.body;
 	const { files } = req;
 	try {
+		console.log("asdf");
 		// check name item exist or not
 		const itemName = name.toLowerCase();
 		const checkItem = await Item.findOne({
@@ -18,10 +19,10 @@ const AddItem = async (req, res) => {
 			},
 		});
 
-		// if (checkItem !== null) {
-		// 	return res.status(406).json({ data: "The Item is already exist" });
-		// }
-
+		if (checkItem !== null) {
+			return res.status(406).json({ data: "The Item is already exist" });
+		}
+		console.log("qwer");
 		// if success check item
 		const addItem = await Item.create({
 			name: itemName,
@@ -30,6 +31,7 @@ const AddItem = async (req, res) => {
 			stock: stock,
 			users_id: users_id,
 		});
+		console.log("yuio");
 		let fileArray = [];
 		console.log(files);
 		for (let i = 0; i < files.length; i++) {
@@ -51,7 +53,7 @@ const AddItem = async (req, res) => {
 			});
 			console.log(addPicture);
 		}
-
+		console.log("ghjk");
 		return res.status(200).json({ data: "Success add item" });
 	} catch (error) {
 		return res.status(500).json({ data: "Failed to add item", error });
